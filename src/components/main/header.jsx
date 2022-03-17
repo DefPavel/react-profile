@@ -7,7 +7,7 @@ const NavBar = () => {
     return(
         <Navbar bg="dark" variant="dark">
         <Container>
-        <Navbar.Brand href="#home">
+        <Navbar.Brand href="/">
             <img
             alt=""
             src="https://react-bootstrap.github.io/logo.svg"
@@ -15,7 +15,7 @@ const NavBar = () => {
             height="30"
             className="d-inline-block align-top"
             />{' '}
-        React Bootstrap
+        ЭИОС «ЛГПУ»
         </Navbar.Brand>
         </Container>
     </Navbar>

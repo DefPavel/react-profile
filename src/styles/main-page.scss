@@ -1,7 +1,6 @@
 
 .page-header {
-    width: 100%;
-    
+    width: 100%;  
     background: url(../assets/images/back.png) no-repeat center;
     background-size: contain;
 }
@@ -12,14 +11,17 @@
 }
 
 .page-title {
-    font-size: 2.4rem;
+    text-align: center;
+    font-size: 2.2rem;
     color: #fff;
     font-weight: 600;
     margin: 2rem 0;
 }
 .page-subtitle {
-    font-weight: 500;
+    text-align: center;
+    font-weight: 400;
     line-height: 2;
     font-size: 1.099rem;
     color: #fff;
+    margin: 2rem 0;
 }
