@@ -23,8 +23,10 @@ const PrivateRoute = ({ children }) => {
 // Если токен существует
 const AuthenticationRoute = ({ children }) => {
   const token = cookies.get('auth-token')
-  if (token) return <Navigate to="/" />
-  else  return children
+  if (token) 
+    return <Navigate to="/" />
+  else  
+    return children
 }
 
 ReactDOM.render(

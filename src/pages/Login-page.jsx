@@ -1,5 +1,5 @@
 import React from "react";
-import { Container , Row, Col, Image, Card } from "react-bootstrap";
+import { Container , Row, Col, Card } from "react-bootstrap";
 import MainLayout from "../components/layouts/main-layout";
 import LoginForm from "../components/login/login-form";
 import "../styles/login-page.scss";

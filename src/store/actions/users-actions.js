@@ -8,10 +8,9 @@ export const signIn = (payload) => {
         // Отправляем запрос
 		await axios.post('/api/auth', payload)
 			.then(resp => {
-				console.log(resp);
-                // записываем в cookies
-				cookies.set('auth-token', payload.token)
-				dispatch(signInAction(resp.data))
+                // записываем в cookies token
+				cookies.set('auth-token', resp.data.auth_token)
+				dispatch(signInAction(resp))
 			})
 			.catch(err => dispatch(signInErrorAction(err.response.data)))
 	}

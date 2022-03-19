@@ -17,18 +17,16 @@ const LoginForm = () => {
     const dispatch = useDispatch();
 	const navigate = useNavigate();
 	const cookies = new Cookies();
-    const key = '88e64e2321a9959ca410ef026eeee408d50742992fdd7357703d0d5d60467a01';
 
+    const Authentication = async (e) => {
 
-    const Authentication = (e) => {
         e.preventDefault();
 
         let iv = rand(32);
         if(iv.length > 32) {
             iv = iv.slice(0,32);
         }
-
-        const AesKey = CryptoJS.enc.Utf8.parse(key);
+        const AesKey = CryptoJS.enc.Utf8.parse('8UHjPgXZzXDgkhqV2QCnooyJyxUzfJrO');
         const byteIv = CryptoJS.enc.Hex.parse(iv);
         //Crypto
         const encryptedStringHex = CryptoJS.AES.encrypt(password, AesKey, {
@@ -39,9 +37,11 @@ const LoginForm = () => {
 
         // Crypto password
         const passwordCrypto = CryptoJS.enc.Hex.stringify(byteIv) + ':' + encryptedStringHex.toString(CryptoJS.enc.Hex);
+        //console.log(passwordCrypto);
         // API post 
-        dispatch(signInAction({ login, password: passwordCrypto }));
+        await dispatch(signInAction({ login, password: passwordCrypto , id_module: 4 }));
         // if token , navigate to profile
+        console.log(cookies.getAll());
         if(cookies.get('auth-token')) {
             navigate('/profile');
         }

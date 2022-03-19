@@ -31,6 +31,9 @@ const ProfilePage = () => {
                                 <p className="text-secondary mb-1">
                                     № зачетной книжки: 10825220007
                                 </p>
+                                <p className="text-secondary mb-1">
+                                    Номер телефона: (8 800 555 3535)
+                                </p>
                             </div>
                         </Card.Body>
                     </Card>          
