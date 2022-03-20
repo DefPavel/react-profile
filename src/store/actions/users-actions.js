@@ -12,6 +12,9 @@ export const signIn = (payload) => {
 				cookies.set('auth-token', resp.data.auth_token)
 				dispatch(signInAction(resp))
 			})
-			.catch(err => dispatch(signInErrorAction(err.response.data)))
+			.catch(err => 
+				{
+					dispatch(signInErrorAction(err.response.data.resp))
+				})
 	}
 }

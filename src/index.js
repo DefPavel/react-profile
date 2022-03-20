@@ -1,5 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom";
+import axios from "axios";
 import {BrowserRouter, Route, Routes, Navigate} from "react-router-dom";
 import Cookies from 'universal-cookie/es6';
 import {Provider} from "react-redux";
@@ -12,6 +13,16 @@ import "./styles/App.scss";
 
 
 const cookies = new Cookies();
+
+axios.interceptors.response.use((response) => {
+  return response;
+}, async (error) => {
+  if (error.response.status === 419) {
+      await cookies.remove('auth-token');
+      window.location.href = '/login';
+  }
+  return Promise.reject(error);
+});
 
 // В случае если токена нет
 const PrivateRoute = ({ children }) => {
@@ -41,9 +52,9 @@ ReactDOM.render(
           }/>
          
           <Route path='/profile' element={
-          
-              <ProfilePage/>
- 
+              <PrivateRoute>
+                <ProfilePage/>
+              </PrivateRoute>
           } />
       </Routes>
   </BrowserRouter>

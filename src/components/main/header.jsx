@@ -1,6 +1,7 @@
 
 import React from "react";
 import { Container, Navbar ,NavDropdown ,Nav } from "react-bootstrap";
+import Cookies from "universal-cookie/es6";
 
 import { IoPersonSharp, IoNewspaperSharp, IoFolderSharp, IoLogInSharp} from "react-icons/io5";
 
@@ -8,15 +9,25 @@ const iconProfile = (<span><IoPersonSharp/> Портофолио</span>)
 const iconDirectory = (<span><IoNewspaperSharp/> Справочники</span>)
 const iconMenu = (<span><IoFolderSharp/> Меню</span>)
 const iconLogin = (<span><IoLogInSharp size={21}/> Авторизация</span>)
+const cookies = new Cookies();
 
+const HeaderAuth = () => {
 
-const signIn = () => {
+    if(cookies.get('auth-token')) {
+        return (
+            <Nav>
+                <Nav.Link href="/profile">
+                <IoPersonSharp/> Тестенко Т.Т.
+                </Nav.Link>
+            </Nav>
+        )
+    }
     return (
-        <Navbar.Collapse className="justify-content-end">
-            <Navbar.Text>
-                Signed in as: <a href="/profile">Джонотова В.И.</a>
-            </Navbar.Text>
-        </Navbar.Collapse>
+        <Nav>
+            <Nav.Link href="/login">
+                {iconLogin}
+            </Nav.Link>
+        </Nav>
     )
 }
 const NavBar = () => {
@@ -51,11 +62,7 @@ const NavBar = () => {
                 </NavDropdown>
             </Nav>
             
-            <Nav>
-                <Nav.Link href="/login">
-                    {iconLogin}
-                </Nav.Link>
-            </Nav>
+            <HeaderAuth />
         </Navbar.Collapse>
         </Container>
     </Navbar>

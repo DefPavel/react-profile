@@ -1,11 +1,11 @@
 import React , { useState } from "react";
-import { Form , Button } from "react-bootstrap";
+import { Form , Button , Alert } from "react-bootstrap";
 import {IoLockOpen} from "react-icons/io5";
 
 import {signIn as signInAction} from "../../store/actions/users-actions";
 import { rand } from "random-bytes-js";
 import Cookies from "universal-cookie/es6";
-import {useDispatch} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import {useNavigate} from "react-router-dom";
 import CryptoJS from "crypto-js"
 
@@ -15,8 +15,23 @@ const LoginForm = () => {
 	const [password, setPassword] = useState("");
 
     const dispatch = useDispatch();
+    const error = useSelector(state => state.users.error);
 	const navigate = useNavigate();
 	const cookies = new Cookies();
+
+    const AlertMessage = () => {
+        const [show, setShow] = useState(true);
+        if (show && error.ru) {
+          return (
+            <Alert variant="danger" onClose={() => setShow(false)} dismissible>
+              <p className="mb-0">
+                  {error.ru}
+              </p>
+            </Alert>
+          );
+        }
+        return <></>
+    }
 
     const Authentication = async (e) => {
 
@@ -41,7 +56,6 @@ const LoginForm = () => {
         // API post 
         await dispatch(signInAction({ login, password: passwordCrypto , id_module: 4 }));
         // if token , navigate to profile
-        console.log(cookies.getAll());
         if(cookies.get('auth-token')) {
             navigate('/profile');
         }
@@ -71,7 +85,7 @@ const LoginForm = () => {
                         required 
                         placeholder="Введите пароль" />
                 </Form.Group>
-
+                <AlertMessage/>
                 <div className="pt-1 mb-4">
                     <Button 
                         style={{width : '120px'}}

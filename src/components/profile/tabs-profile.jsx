@@ -1,77 +1,82 @@
 import React , {useEffect} from "react";
-import {useDispatch } from "react-redux";
-import { getStudentCard } from "../../store/actions/persons-actions";
+import {useDispatch ,useSelector } from "react-redux";
+import {Card , Image, Row, Tabs ,Tab } from "react-bootstrap";
+import { getStudentInfo } from "../../store/actions/persons-actions";
+import TabsMarks from "./tabs-marks";
+import TabsGroup from "./tabs-group";
+import moment from "moment";
 
 const TabsProfile = () => {
 
+    const person = useSelector(state => state.persons.person);
+    // Основная информация о студенте
     const dispatch = useDispatch();
-
+    
     useEffect(() => {
-        dispatch(getStudentCard());
+        dispatch(getStudentInfo());
     }, 
     [dispatch]);
 
-    return (
-        <div style={{padding: '1rem'}}>
-        <div className="col-sm-3">
-            <h6 className="mb-0">Институт/Факультет :</h6>
-        </div>
-        <div className="col-sm-8 text-secondary">
-            <p>Институт педагогики и психологии</p>
-        </div>
-        <hr />
-        <div className="col-sm-3">
-            <h6 className="mb-0">Специальность :</h6>
-        </div>
-        <div className="col-sm-8 text-secondary">
-            <p>Социальная психология</p>
-        </div>
-        <hr />
-        <div className="col-sm-2">
-            <h6 className="mb-0">Группа :</h6>
-        </div>
-        <div className="col-sm-8 text-secondary">
-            <p>ДО</p>
-        </div>
-        <hr />
-        <div className="col-sm-2">
-            <h6 className="mb-0">Курс :</h6>
-        </div>
-        <div className="col-sm-8 text-secondary">
-            <p>1</p>
-        </div>
-        <hr />
-        <div className="col-sm-3">
-            <h6 className="mb-0">Форма обучения :</h6>
-        </div>
-        <div className="col-sm-8 text-secondary">
-            <p>Очная</p>
-        </div>
-        <hr />
-        <div className="col-sm-3">
-            <h6 className="mb-0">Форма оплаты :</h6>
-        </div>
-        <div className="col-sm-8 text-secondary">
-            <p>Бюджет</p>
-        </div>
-        <hr />
-        <div className="col-sm-4">
-            <h6 className="mb-0">Образовательный уровень :</h6>
-        </div>
-        <div className="col-sm-8 text-secondary">
-            <p>Бакалавр</p>
-        </div>
-        <hr />
-        <div className="col-sm-3">
-            <h6 className="mb-0">Номер телефона :</h6>
-        </div>
-        <div className="col-sm-8 text-secondary">
-            <p>8 800 555 3535</p>
-        </div>
-        <hr />
-        </div>
-      
-    )
+    if(person) {
+        const path = 'http://localhost:8080/' + person?.photo_path;
+        return (
+            <Row>
+            <div className="col-md-4 mb-3">
+                        <Card>
+                            <Card.Body>
+                                <div className="d-flex flex-column align-items-center text-center">
+                                    <Image 
+                                        width={150}
+                                        alt="photo" 
+                                        src={path} />
+                                </div>
+                                <div className="mt-3 text-center">
+                                    <h5 className="fw-bold ">{person?.lastname} {person?.firstname} {person?.middlename}</h5>
+                                    <p className="text-secondary mb-1">
+                                        Email: {person?.email}
+                                    </p>
+                                    <p className="text-secondary mb-1">
+                                        Дата рождения: { moment().format('DD.MM.YYYY') }
+                                    </p>
+                                    <p className="text-secondary mb-1">
+                                        Номер телефона: ({person?.mobile_phone})
+                                    </p>
+                                    <p className="text-secondary mb-1">
+                                        Город: {person?.place_of_birth}
+                                    </p>
+                                </div>
+                            </Card.Body>
+                        </Card>          
+                    </div>
+                    <div className="col-md-8">
+                        <Card className="mb-3">
+                            <Card.Body>
+                                <Row>
+                                <Tabs
+                                    defaultActiveKey="first"
+                                    transition={false}
+                                    className="mb-3"
+                                    >
+                                    <Tab eventKey="first" title="Основная информация">
+                                        <TabsGroup />
+                                    </Tab>
+                                    <Tab eventKey="second" title="Оценки">
+                                        <TabsMarks />
+                                    </Tab>
+                                    <Tab eventKey="third" title="Награды" disabled>
+                                        <p>Награды</p>
+                                    </Tab>
+                                    </Tabs>
+                                    
+                                </Row>
+                            </Card.Body>
+                        </Card>
+                    </div>
+            </Row>
+            
+        )
+    }
+   
 }
 
 export default TabsProfile;
