@@ -1,20 +1,40 @@
-import React , {useEffect} from "react";
+import React , {useEffect ,useState} from "react";
 import {useDispatch ,useSelector } from "react-redux";
 import { getStudentGroup } from "../../store/actions/persons-actions";
+import Select from 'react-select';
 
 
 const TabsGroup = () => {
 
     const dispatch = useDispatch();
     const group = useSelector(state => state.persons.group);
+    const user = useSelector(state => state.users.user);
+    console.log(user);
     useEffect(() => {
-        dispatch(getStudentGroup());
+        dispatch(getStudentGroup(user.data));
     }, 
     [dispatch]);
+    // Вывести список групп в которых студент учится
+
+    
 
     if(group) {
+        //const [selectedOption, setSelectedOption] = useState(null);
+            /*const options = group.map(d => ({
+                'value': d.id,
+                'label': d.group_nickname
+            }));
+
+            <Select className="mb-2" 
+                            defaultValue={selectedOption}
+                            onChange={setSelectedOption}
+                            options={options}
+                        />
+            */
+
         return (
             <div style={{padding: '1rem'}}>
+                
             <div className="col-sm-3">
                 <h6 className="mb-0">Институт/Факультет :</h6>
             </div>

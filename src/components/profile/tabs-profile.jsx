@@ -8,12 +8,14 @@ import moment from "moment";
 
 const TabsProfile = () => {
 
+    // Забрать id Студента
     const person = useSelector(state => state.persons.person);
+    const user = useSelector(state => state.users.user);
     // Основная информация о студенте
     const dispatch = useDispatch();
     
     useEffect(() => {
-        dispatch(getStudentInfo());
+        dispatch(getStudentInfo(user.data));
     }, 
     [dispatch]);
 

@@ -1,5 +1,6 @@
 
 import React from "react";
+import {useSelector} from "react-redux";
 import { Container, Navbar ,NavDropdown ,Nav } from "react-bootstrap";
 import Cookies from "universal-cookie/es6";
 import { IoPersonSharp, IoNewspaperSharp, IoFolderSharp, IoLogInSharp} from "react-icons/io5";
@@ -15,10 +16,13 @@ const RemoveToken = async () => {
     return window.location.href = '/';
 }
 
+
 const HeaderAuth = () => {
 
+    // get login information
+    const user = useSelector(state => state.users.user);
     if(cookies.get('auth-token')) {
-        const iconSign = (<span><IoPersonSharp/> Тестенко Т.Т.</span>)
+        const iconSign = (<span><IoPersonSharp/> {user.data?.login}</span>)
 
         return (
             <Nav>

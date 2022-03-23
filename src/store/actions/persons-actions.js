@@ -3,7 +3,7 @@ import {getInfoByPerson, getInfoGroupByPerson,  errorByPerson} from "../reducers
 
 export const getStudentInfo = (payload) => {
     return async dispatch => {
-        await axios.get(`/api/portfolio/student/${1}`)
+        await axios.get(`/api/portfolio/student/${payload.id_student}`)
         .then(resp => {
             dispatch(getInfoByPerson(resp.data))
         })
@@ -12,7 +12,7 @@ export const getStudentInfo = (payload) => {
 }
 export const getStudentGroup = (payload) => {
     return async dispatch => {
-        await axios.get(`/api/portfolio/group/${1}`)
+        await axios.get(`/api/portfolio/group/${payload.id_student}`)
         .then(resp => {
             dispatch(getInfoGroupByPerson(resp.data))
         })
