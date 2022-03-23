@@ -2,7 +2,6 @@
 import React from "react";
 import { Container, Navbar ,NavDropdown ,Nav } from "react-bootstrap";
 import Cookies from "universal-cookie/es6";
-
 import { IoPersonSharp, IoNewspaperSharp, IoFolderSharp, IoLogInSharp} from "react-icons/io5";
 
 const iconProfile = (<span><IoPersonSharp/> Портофолио</span>)
@@ -11,14 +10,21 @@ const iconMenu = (<span><IoFolderSharp/> Меню</span>)
 const iconLogin = (<span><IoLogInSharp size={21}/> Авторизация</span>)
 const cookies = new Cookies();
 
+const RemoveToken = async () => {
+    await cookies.remove('auth-token');
+    return window.location.href = '/';
+}
+
 const HeaderAuth = () => {
 
     if(cookies.get('auth-token')) {
+        const iconSign = (<span><IoPersonSharp/> Тестенко Т.Т.</span>)
+
         return (
             <Nav>
-                <Nav.Link href="/profile">
-                <IoPersonSharp/> Тестенко Т.Т.
-                </Nav.Link>
+                <NavDropdown title={iconSign} id="collasible-nav-dropdown">
+                    <NavDropdown.Item onClick={ () => RemoveToken() }>Выйти</NavDropdown.Item>
+                </NavDropdown>
             </Nav>
         )
     }
