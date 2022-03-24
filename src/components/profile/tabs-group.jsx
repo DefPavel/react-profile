@@ -1,29 +1,29 @@
-import React , {useEffect ,useState} from "react";
+import React , { useEffect } from "react";
 import {useDispatch ,useSelector } from "react-redux";
-import { getStudentGroup } from "../../store/actions/persons-actions";
+import { getStudentGroup , getGroupById } from "../../store/actions/persons-actions";
 import Cookies from "universal-cookie/es6";
 import Select from 'react-select';
 
 const TabsGroup = () => {
-    const cookie = new Cookies();
+    
     const dispatch = useDispatch();
-    const group = useSelector(state => state.persons.group);  
-    const selectedGroup = null;
+    const cookie = new Cookies();
+    const group = useSelector(state => state.persons.groups); 
+    const selectedGroup = useSelector(state => state.persons.group);
 
     const options = group.map(d => ({
         'value': d.id,
         'label': d.group_nickname
     }));
-    
-    const fiterGroup = (data) => {
-        console.log(data);
-        selectedGroup = group.filter(element => element.group_nickname == data.label);
-    }
 
     useEffect(() => {
         const userInformation = cookie.get('user');
         dispatch(getStudentGroup(userInformation));
     }, []);
+
+    const byIdGroup = (id) => {
+        dispatch(getGroupById(id));
+    }
 
     return (
         <div style={{padding: '1rem'}}>
@@ -31,7 +31,8 @@ const TabsGroup = () => {
                 <h6 className="mb-0">Выбрать группу :</h6>
             </div>
                 <Select className="mt-2"
-                    onChange={opt => console.log(opt)}
+                    defaultValue={options[0]}
+                    onChange={opt => { byIdGroup(opt.value) } }
                     options={options}
                 />
             <hr />
@@ -68,7 +69,7 @@ const TabsGroup = () => {
                 <h6 className="mb-0">Форма оплаты :</h6>
             </div>
             <div className="col-sm-8 text-secondary">
-                <p>Бюджет</p>
+                <p>{selectedGroup?.basis}</p>
             </div>
             <hr />
             <div className="col-sm-4">

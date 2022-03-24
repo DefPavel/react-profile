@@ -1,6 +1,5 @@
 
 import React from "react";
-import {useSelector} from "react-redux";
 import { Container, Navbar ,NavDropdown ,Nav } from "react-bootstrap";
 import Cookies from "universal-cookie/es6";
 import { IoPersonSharp, IoNewspaperSharp, IoFolderSharp, IoLogInSharp} from "react-icons/io5";
@@ -22,7 +21,7 @@ const HeaderAuth = () => {
     if(cookies.get('auth-token')) {
 
         const userInformation = cookies.get('user');
-        const iconSign = (<span><IoPersonSharp/> {userInformation.login}</span>)
+        const iconSign = (<span> Ваш профиль: {userInformation.login}</span>)
 
         return (
             <Nav>

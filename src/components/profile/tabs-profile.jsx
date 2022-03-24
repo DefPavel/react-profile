@@ -14,13 +14,11 @@ const TabsProfile = () => {
     // Основная информация о студенте
     const dispatch = useDispatch();
     const cookie = new Cookies();
-    
     useEffect(() => {
         const userInformation = cookie.get('user');
         dispatch(getStudentInfo(userInformation));
     }, []);
-
-    if(person) {
+    
         const path = 'http://localhost:8080/' + person?.photo_path;
         return (
             <Row>
@@ -79,7 +77,5 @@ const TabsProfile = () => {
             
         )
     }
-   
-}
 
 export default TabsProfile;
