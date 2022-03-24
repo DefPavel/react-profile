@@ -1,5 +1,6 @@
 import React , {useEffect} from "react";
 import {useDispatch ,useSelector } from "react-redux";
+import Cookies from "universal-cookie/es6";
 import {Card , Image, Row, Tabs ,Tab } from "react-bootstrap";
 import { getStudentInfo } from "../../store/actions/persons-actions";
 import TabsMarks from "./tabs-marks";
@@ -10,14 +11,14 @@ const TabsProfile = () => {
 
     // Забрать id Студента
     const person = useSelector(state => state.persons.person);
-    const user = useSelector(state => state.users.user);
     // Основная информация о студенте
     const dispatch = useDispatch();
+    const cookie = new Cookies();
     
     useEffect(() => {
-        dispatch(getStudentInfo(user.data));
-    }, 
-    [dispatch]);
+        const userInformation = cookie.get('user');
+        dispatch(getStudentInfo(userInformation));
+    }, []);
 
     if(person) {
         const path = 'http://localhost:8080/' + person?.photo_path;

@@ -10,6 +10,7 @@ export const signIn = (payload) => {
 			.then(resp => {
                 // записываем в cookies token
 				cookies.set('auth-token', resp.data.auth_token)
+				cookies.set('user', JSON.stringify(resp.data))
 				dispatch(signInAction(resp))
 			})
 			.catch(err => 

@@ -19,10 +19,10 @@ const RemoveToken = async () => {
 
 const HeaderAuth = () => {
 
-    // get login information
-    const user = useSelector(state => state.users.user);
     if(cookies.get('auth-token')) {
-        const iconSign = (<span><IoPersonSharp/> {user.data?.login}</span>)
+
+        const userInformation = cookies.get('user');
+        const iconSign = (<span><IoPersonSharp/> {userInformation.login}</span>)
 
         return (
             <Nav>

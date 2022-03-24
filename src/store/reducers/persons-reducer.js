@@ -1,6 +1,6 @@
 const defaultState = {
     person: {},
-	group: {},
+	group: [],
 	error: {}
 }
 
@@ -14,7 +14,7 @@ export const personsReducer = (state = defaultState, action) => {
 		case PERSONS_INFO:
 			return {...state, person: {...action.payload}};
 		case GROUP_INFO:
-			return {...state, group: {...action.payload}};
+			return {...state, group: [...action.payload]};
 		case PERSONS_ERROR:
 			return {...state, error: {...action.payload}};
 		default:
