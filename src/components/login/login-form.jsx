@@ -49,6 +49,9 @@ const LoginForm = () => {
         if(cookies.get('auth-token')) {
             navigate('/profile');
         }
+        else {
+            setLoading(false);
+        }
     }
 
     return (

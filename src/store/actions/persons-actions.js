@@ -35,7 +35,6 @@ export const getStudentGroup = (payload) => {
     }
 }
 export const getMarks = (payload) => {
-    console.log(payload);
     return async dispatch => {
         await axios.get(`/api/portfolio/marks/${payload.id_group}/${payload.id_student}`)
         .then(resp => {

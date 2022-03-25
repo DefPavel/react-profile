@@ -19,7 +19,7 @@ const TabsGroup = () => {
 
     useEffect(() => {
         dispatch(getStudentGroup(userInformation));
-    }, []);
+    });
 
     const byIdGroup = (id) => {
         dispatch(getGroupById(id));
@@ -32,7 +32,6 @@ const TabsGroup = () => {
                 <h6 className="mb-0">Выбрать группу :</h6>
             </div>
                 <Select className="mt-2"
-                    defaultValue={options[0]}
                     onChange={opt => { byIdGroup(opt.value) } }
                     options={options}
                 />

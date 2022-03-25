@@ -17,7 +17,7 @@ const TabsProfile = () => {
     useEffect(() => {
         const userInformation = cookie.get('user');
         dispatch(getStudentInfo(userInformation));
-    }, []);
+    });
     
         const path = 'http://localhost:8080/' + person?.photo_path;
         return (
