@@ -1,5 +1,11 @@
 import axios from "axios";
-import {getInfoByPerson, getInfoGroupByPerson, getInfoGroupById, errorByPerson} from "../reducers/persons-reducer";
+import {
+        getInfoByPerson, 
+        getInfoGroupByPerson, 
+        getInfoGroupById, 
+        getInfoMarksByStudent,
+        errorByPerson
+    } from "../reducers/persons-reducer";
 
 export const getStudentInfo = (payload) => {
     return async dispatch => {
@@ -24,6 +30,16 @@ export const getStudentGroup = (payload) => {
         await axios.get(`/api/portfolio/groups/${payload.id_student}`)
         .then(resp => {
             dispatch(getInfoGroupByPerson(resp.data))
+        })
+        .catch(err => console.log(err))
+    }
+}
+export const getMarks = (payload) => {
+    console.log(payload);
+    return async dispatch => {
+        await axios.get(`/api/portfolio/marks/${payload.id_group}/${payload.id_student}`)
+        .then(resp => {
+            dispatch(getInfoMarksByStudent(resp.data))
         })
         .catch(err => console.log(err))
     }

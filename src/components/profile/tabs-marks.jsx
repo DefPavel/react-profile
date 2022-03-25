@@ -1,52 +1,40 @@
-import React, { useState } from 'react'
+import React from 'react';
+import { useSelector } from "react-redux";
 import { Table } from "react-bootstrap";
-import Select from 'react-select';
 
 const TabsMarks = () => {
 
-    const options = [
-        { value: '-1', label: 'Все' },
-        { value: '1', label: '1' },
-        { value: '2', label: '2' },
-        { value: '3', label: '3' },
-      ];
-    const [selectedOption, setSelectedOption] = useState(null);
+     const marks = useSelector(state => state.persons.marks);
 
     return (
         <div style={{padding: '1rem'}}>
-            <Select className="mb-2" 
-                defaultValue={selectedOption}
-                onChange={setSelectedOption}
-                options={options}
-            />
             <Table responsive striped bordered hover >
             <thead>
                 <tr>
                 <th>#</th>
                 <th>Тип Предмета</th>
                 <th>Предмет</th>
+                <th>Семестр</th>
                 <th>100-бал.оц.</th>
                 <th>Экз.оц.</th>
                 <th>Зачет оц.</th>
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                <td>1</td>
-                <td>Экзамен</td>
-                <td>Психология</td>
-                <td>75</td>
-                <td>4</td>
-                <td></td>
-                </tr>
-                <tr>
-                <td>2</td>
-                <td>Экзамен</td>
-                <td>Психология</td>
-                <td>75</td>
-                <td>4</td>
-                <td></td>
-                </tr>
+                {marks.map((item , i) => {
+                    return [
+                        <tr key={i}>
+                        <td>{item.id_mark}</td>
+                        <td>{item.form_control_name}</td>
+                        <td>{item.subject_name}</td>
+                        <td>{item.semester}</td>
+                        <td>{item.ball_100}</td>
+                        <td>{item.ball_ects}</td>
+                        <td>{item.ball_5}</td>
+
+                    </tr>
+                    ]
+                })}
             </tbody>
         </Table>
         </div>

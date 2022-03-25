@@ -1,6 +1,6 @@
 import React , { useEffect } from "react";
 import {useDispatch ,useSelector } from "react-redux";
-import { getStudentGroup , getGroupById } from "../../store/actions/persons-actions";
+import { getStudentGroup , getGroupById ,getMarks } from "../../store/actions/persons-actions";
 import Cookies from "universal-cookie/es6";
 import Select from 'react-select';
 
@@ -8,6 +8,7 @@ const TabsGroup = () => {
     
     const dispatch = useDispatch();
     const cookie = new Cookies();
+    const userInformation = cookie.get('user');
     const group = useSelector(state => state.persons.groups); 
     const selectedGroup = useSelector(state => state.persons.group);
 
@@ -17,12 +18,12 @@ const TabsGroup = () => {
     }));
 
     useEffect(() => {
-        const userInformation = cookie.get('user');
         dispatch(getStudentGroup(userInformation));
     }, []);
 
     const byIdGroup = (id) => {
         dispatch(getGroupById(id));
+        dispatch(getMarks({id_group: id , id_student: userInformation.id_student }));
     }
 
     return (
