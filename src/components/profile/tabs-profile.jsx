@@ -9,27 +9,29 @@ import moment from "moment";
 
 const TabsProfile = () => {
 
-    // Забрать id Студента
-    const person = useSelector(state => state.persons.person);
-    // Основная информация о студенте
+    
     const dispatch = useDispatch();
     const cookie = new Cookies();
+    
+    const person = useSelector(state => state.persons.person);
+
     useEffect(() => {
         const userInformation = cookie.get('user');
         dispatch(getStudentInfo(userInformation));
-    });
+    }, []);
     
-        const path = 'http://localhost:8080/' + person?.photo_path;
+        const path = `/server-storage/${person?.photo_path}`;
         return (
             <Row>
             <div className="col-md-4 mb-3">
                         <Card>
                             <Card.Body>
                                 <div className="d-flex flex-column align-items-center text-center">
-                                    <Image 
+                                {person?.photo_path && <Image 
                                         width={150}
                                         alt="photo" 
                                         src={path} />
+                                }
                                 </div>
                                 <div className="mt-3 text-center">
                                     <h5 className="fw-bold ">{person?.lastname} {person?.firstname} {person?.middlename}</h5>

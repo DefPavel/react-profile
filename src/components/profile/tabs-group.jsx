@@ -19,7 +19,7 @@ const TabsGroup = () => {
 
     useEffect(() => {
         dispatch(getStudentGroup(userInformation));
-    });
+    }, []);
 
     const byIdGroup = (id) => {
         dispatch(getGroupById(id));
