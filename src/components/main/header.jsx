@@ -10,7 +10,7 @@ const iconMenu = (<span><IoFolderSharp/> Меню</span>)
 const iconLogin = (<span><IoLogInSharp size={21}/> Авторизация</span>)
 const cookies = new Cookies();
 
-const RemoveToken = async () => {
+const removeToken = async () => {
     await cookies.remove('auth-token');
     return window.location.href = '/';
 }
@@ -26,7 +26,7 @@ const HeaderAuth = () => {
         return (
             <Nav>
                 <NavDropdown title={iconSign} id="collasible-nav-dropdown">
-                    <NavDropdown.Item onClick={ () => RemoveToken() }>Выйти</NavDropdown.Item>
+                    <NavDropdown.Item onClick={ () => removeToken() }>Выйти</NavDropdown.Item>
                 </NavDropdown>
             </Nav>
         )

@@ -6,13 +6,15 @@ const defaultState = {
 	error: {}
 }
 
-// Получить информацию о пресоне
+
 const PERSONS_INFO = "PERSONS_INFO";
 const GROUP_INFO = "GROUP_INFO";
 const GROUP_ID = "GROUP_ID";
 const PERSONS_ERROR = "PERSONS_ERROR";
 const MARKS = "MARKS";
-
+/**
+ * УДАЛИТЬ
+ */
 export const personsReducer = (state = defaultState, action) => {
 	switch (action.type) {
 		case PERSONS_INFO:

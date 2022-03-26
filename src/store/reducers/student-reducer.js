@@ -1,8 +1,6 @@
 const defaultState = {
     student: {},
 }
-
-
 const GET_STUDENT_BY_ID = 'GET_STUDENT_BY_ID';
 
 export const studentReducer = (state = defaultState, action) => {

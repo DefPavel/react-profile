@@ -1,8 +1,6 @@
-
 const defaultState = {
     id_plan: 0
 }
-
 const GET_PLAN_ID = 'GET_PLAN_ID';
 
 export const planReducer = (state = defaultState, action) => {

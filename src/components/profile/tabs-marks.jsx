@@ -4,7 +4,7 @@ import { Table } from "react-bootstrap";
 
 const TabsMarks = () => {
 
-     const marks = useSelector(state => state.persons.marks);
+     //const marks = useSelector(state => state.persons.marks);
 
     return (
         <div style={{padding: '1rem'}}>
@@ -21,20 +21,23 @@ const TabsMarks = () => {
                 </tr>
             </thead>
             <tbody>
-                {marks.map((item , i) => {
-                    return [
-                        <tr key={i}>
-                        <td>{item.id_mark}</td>
-                        <td>{item.form_control_name}</td>
-                        <td>{item.subject_name}</td>
-                        <td>{item.semester}</td>
-                        <td>{item.ball_100}</td>
-                        <td>{item.ball_ects}</td>
-                        <td>{item.ball_5}</td>
+                { /*marks.map((item , i) => {
+                        return [
+                            <tr key={i}>
+                            <td>{item.id_mark}</td>
+                            <td>{item.form_control_name}</td>
+                            <td>{item.subject_name}</td>
+                            <td>{item.semester}</td>
+                            <td>{item.ball_100}</td>
+                            <td>{item.ball_ects}</td>
+                            <td>{item.ball_5}</td>
 
-                    </tr>
-                    ]
-                })}
+                        </tr>
+                        ]
+
+                    })
+                    */
+                }
             </tbody>
         </Table>
         </div>

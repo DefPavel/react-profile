@@ -2,7 +2,9 @@ import axios from "axios";
 import {signInAction, signInErrorAction} from "../reducers/users-reducer";
 import Cookies from 'universal-cookie/es6';
 const cookies = new Cookies();
-
+/**
+ * Авторизация через JMU
+ */
 export const signIn = (payload) => {
 	return async dispatch => {
         // Отправляем запрос
@@ -18,4 +20,4 @@ export const signIn = (payload) => {
 					dispatch(signInErrorAction(err.response.data.resp))
 				})
 	}
-}
+};

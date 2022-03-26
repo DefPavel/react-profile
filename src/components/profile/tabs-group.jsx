@@ -1,6 +1,7 @@
 import React , { useEffect } from "react";
 import {useDispatch ,useSelector } from "react-redux";
-import { getStudentGroup , getGroupById ,getMarks } from "../../store/actions/persons-actions";
+//import { getStudentGroup , getGroupById ,getMarks } from "../../store/actions/persons-actions";
+import { fetchAllGroupsByStudent , fetchGroupById } from "../../store/actions/group-actions";
 import Cookies from "universal-cookie/es6";
 import Select from 'react-select';
 
@@ -9,8 +10,8 @@ const TabsGroup = () => {
     const dispatch = useDispatch();
     const cookie = new Cookies();
     const userInformation = cookie.get('user');
-    const group = useSelector(state => state.persons.groups); 
-    const selectedGroup = useSelector(state => state.persons.group);
+    const group = useSelector(state => state.groups.groups); 
+    const selectedGroup = useSelector(state => state.groups.selectedGroup);
 
     const options = group.map(d => ({
         'value': d.id,
@@ -18,12 +19,13 @@ const TabsGroup = () => {
     }));
 
     useEffect(() => {
-        dispatch(getStudentGroup(userInformation));
+        if(userInformation)
+            dispatch(fetchAllGroupsByStudent(userInformation.id_student));
     }, []);
 
     const byIdGroup = (id) => {
-        dispatch(getGroupById(id));
-        dispatch(getMarks({id_group: id , id_student: userInformation.id_student }));
+        dispatch(fetchGroupById(id));
+        //dispatch(getMarks({id_group: id , id_student: userInformation.id_student }));
     }
 
     return (
@@ -112,8 +114,7 @@ const TabsGroup = () => {
             </div>
             <hr />
         </div>
-    )
-   
+    )  
 }
 
 export default TabsGroup;

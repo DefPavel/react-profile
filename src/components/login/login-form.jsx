@@ -20,7 +20,7 @@ const LoginForm = () => {
 	const navigate = useNavigate();
 	const cookies = new Cookies();
 
-    const Authentication = async (e) => {
+    const authentication = async (e) => {
 
         e.preventDefault();
         setLoading(true);
@@ -55,7 +55,7 @@ const LoginForm = () => {
     }
 
     return (
-                <Form onSubmit={(e) => Authentication(e)}>
+                <Form onSubmit={(e) => authentication(e)}>
                     <div className="d-flex align-items-center mb-3 pb-1">
                         <h5 className="login-title">Авторизация</h5>
                     </div>
