@@ -1,12 +1,12 @@
 const defaultState = {
-    id_plan: 0
+    plan: {}
 }
 const GET_PLAN_ID = 'GET_PLAN_ID';
 
 export const planReducer = (state = defaultState, action) => {
 	switch (action.type) {
 		case GET_PLAN_ID:
-			return {...state, id_plan: action.payload};
+			return {...state, plan: action.payload};
 		default:
 			return state;
 	}

@@ -1,44 +1,50 @@
-import React , { useEffect } from "react";
-import {useDispatch ,useSelector } from "react-redux";
-//import { getStudentGroup , getGroupById ,getMarks } from "../../store/actions/persons-actions";
-import { fetchAllGroupsByStudent , fetchGroupById } from "../../store/actions/group-actions";
+import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchAllGroupsByStudent } from "../../store/actions/group-actions";
+import { fetchCoursesByGroup } from "../../store/actions/courses-actions";
 import Cookies from "universal-cookie/es6";
-import Select from 'react-select';
 
 const TabsGroup = () => {
     
     const dispatch = useDispatch();
     const cookie = new Cookies();
     const userInformation = cookie.get('user');
-    const group = useSelector(state => state.groups.groups); 
-    const selectedGroup = useSelector(state => state.groups.selectedGroup);
 
-    const options = group.map(d => ({
-        'value': d.id,
-        'label': d.group_nickname
-    }));
+    const group = useSelector(state => state.groups.groups); 
+    const plans = useSelector(state => state.plans.plan);
+    const [selectedGroup, setselectedGroup] = useState('');
 
     useEffect(() => {
-        if(userInformation)
+        if(userInformation) {
             dispatch(fetchAllGroupsByStudent(userInformation.id_student));
-    }, []);
+            setselectedGroup(group[0]);
+        }
+    }, []); // on load page
 
-    const byIdGroup = (id) => {
-        dispatch(fetchGroupById(id));
-        //dispatch(getMarks({id_group: id , id_student: userInformation.id_student }));
-    }
+    const courseByGroyp = (id_group) => {
+        dispatch(fetchCoursesByGroup(plans.id, id_group));
+        setselectedGroup(group[id_group]);
+    };
+
+    const parseGroups = () => {
+        const options = [];
+        for (let index = 0; index < group.length; index++)
+            options.push(
+                <option key={group[index].id} value={group[index].id}>{group[index].group_nickname}</option>
+            )
+
+        return options;
+    };
 
     return (
         <div style={{padding: '1rem'}}>
-            <div className="col-sm-3">
+            <div className="col-sm-3 mt-2">
                 <h6 className="mb-0">Выбрать группу :</h6>
             </div>
-                <Select className="mt-2"
-                    onChange={opt => { byIdGroup(opt.value) } }
-                    options={options}
-                />
-            <hr />
-                
+            <select className={'form-control'} onChange={e => courseByGroyp(e.target.value)} disabled={false}>
+                        {parseGroups()}
+            </select>
+            <hr />  
             <div className="col-sm-3">
                 <h6 className="mb-0">Институт/Факультет :</h6>
             </div>
@@ -51,13 +57,6 @@ const TabsGroup = () => {
             </div>
             <div className="col-sm-8 text-secondary">
                 <p>{selectedGroup?.specialty_name}</p>
-            </div>
-            <hr />
-            <div className="col-sm-2">
-                <h6 className="mb-0">Курс :</h6>
-            </div>
-            <div className="col-sm-8 text-secondary">
-                <p>{selectedGroup?.course}</p>
             </div>
             <hr />
             <div className="col-sm-3">

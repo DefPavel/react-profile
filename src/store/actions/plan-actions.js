@@ -9,7 +9,10 @@ export const fetchPlanIdByGroup = (idSpecialty, yearAdmission) => {
             params: {
                 idSpecialty,
                 yearAdmission
-            }
+            },
+            /*headers: {
+                'auth-token': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJsb2dpbiI6InN0dWRlbnQiLCJpZF91c2VyIjoyLCJpZF9vcmciOjEsImlkX21vZHVsZSI6NH0.T5_tIfZe3SN6X26MwH-BuC7zVjehU6dUwvSrkAGjA_E'
+            } */
         })
         .then(resp => {
             dispatch(getPlanIdByGroupAction(resp.data))

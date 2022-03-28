@@ -14,6 +14,12 @@ import "./styles/App.scss";
 
 const cookies = new Cookies();
 
+axios.interceptors.request.use((config) => {
+  if (cookies.get('auth-token'))
+      config.headers.common['auth-token'] = cookies.get('auth-token');
+  return config
+})
+
 axios.interceptors.response.use((response) => {
   return response;
 }, async (error) => {

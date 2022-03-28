@@ -65,8 +65,8 @@ const TabsProfile = () => {
                                     <Tab eventKey="second" title="Оценки">
                                         <TabsMarks />
                                     </Tab>
-                                    <Tab eventKey="third" title="Награды" disabled>
-                                        <p>Награды</p>
+                                    <Tab eventKey="third" title="Достижения" disabled>
+                                        <p>Достижения</p>
                                     </Tab>
                                     </Tabs>
                                     

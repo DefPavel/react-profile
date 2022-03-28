@@ -8,6 +8,7 @@ import {planReducer} from "./reducers/plan-reducer";
 import {coursesReducer} from "./reducers/courses-reducer";
 import {semestersReducer} from "./reducers/semesters-reducer";
 import {formControlReducer} from "./reducers/form-reducer";
+import {marksReducer} from "./reducers/marks-reducer";
 
 const rootReducer = combineReducers({
 	users: usersReducer,
@@ -16,7 +17,9 @@ const rootReducer = combineReducers({
 	plans: planReducer,
 	courses: coursesReducer,
 	semesters: semestersReducer,
-	forms : formControlReducer
+	forms: formControlReducer,
+	marks: marksReducer,
+
 	
 });
 
