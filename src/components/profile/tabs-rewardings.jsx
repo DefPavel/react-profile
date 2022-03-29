@@ -4,10 +4,11 @@ import {Form} from 'react-bootstrap';
 
 const TabsRewardings = () => {
     return (
-        <div style={{padding: '1rem'}}>
+        <div>
             <Form.Group className="mb-3">
                 <Form.Label htmlFor="inputData">Введитие наименование документа</Form.Label>
                 <Form.Control
+                    placeholder="Диплом победителя конкурса «Русский Медвежонок-2007»"
                     type="text"
                     id="inputData"
                 />

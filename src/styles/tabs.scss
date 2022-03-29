@@ -1,0 +1,38 @@
+$mainFont: 'Roboto', serif;
+$colorBacground : #efefef;
+$mainBorder: 1px solid #dadada;
+$notifyColor: #212529;
+$secondColor: #636767;
+
+.tabs {
+    border-bottom: $mainBorder;
+    background-color: #ffffff;
+    height: 35px;
+    width: 100%;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    font-family: $mainFont;
+  
+    ul {
+      display: flex;
+      height: 100%;
+      margin-bottom: 0;
+      .tabs__nav {
+        display: flex;
+        align-items: center;
+        font-weight: 500;
+        font-size: 0.88rem;
+        padding: 0 15px;
+  
+        &:hover {
+          cursor: pointer;
+          border-bottom: 2px solid rgba(0,0,0,.55);
+        }
+  
+        &_active, &_active:hover {
+          border-bottom: 2px solid $notifyColor;
+        }
+      }
+    }
+  }

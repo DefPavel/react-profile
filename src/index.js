@@ -4,12 +4,12 @@ import axios from "axios";
 import {BrowserRouter, Route, Routes, Navigate} from "react-router-dom";
 import Cookies from 'universal-cookie/es6';
 import {Provider} from "react-redux";
-
 import MainPage from "./pages/Main-page";
 import LoginPage from "./pages/Login-page";
 import ProfilePage from "./pages/Profile-page";
 import {store} from "./store";
-import "./styles/App.scss";
+import 'bootstrap/dist/css/bootstrap.min.css';
+import "./styles/style.scss";
 
 
 const cookies = new Cookies();

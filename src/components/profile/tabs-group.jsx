@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import {Form} from 'react-bootstrap';
 import { useDispatch, useSelector } from "react-redux";
 import { fetchAllGroupsByStudent } from "../../store/actions/group-actions";
-import { fetchCoursesByGroup } from "../../store/actions/courses-actions";
 import Cookies from "universal-cookie/es6";
 
 const TabsGroup = () => {
@@ -12,18 +11,18 @@ const TabsGroup = () => {
     const userInformation = cookie.get('user');
 
     const group = useSelector(state => state.groups.groups); 
-    const plans = useSelector(state => state.plans.plan);
+    //const plans = useSelector(state => state.plans.plan);
     const [selectedGroup, setselectedGroup] = useState('');
 
     useEffect(() => {
         if(userInformation) {
+            console.log(group[0]);
             dispatch(fetchAllGroupsByStudent(userInformation.id_student));
             setselectedGroup(group[0]);
         }
     }, []); // on load page
 
-    const courseByGroyp = (id_group) => {
-        dispatch(fetchCoursesByGroup(plans.id, id_group));
+    const changeGroup = (id_group) => {
         setselectedGroup(group[id_group]);
     };
 
@@ -38,13 +37,13 @@ const TabsGroup = () => {
     };
 
     return (
-        <div className="row g-3" style={{padding: '1rem'}}>
+        <div className="row g-3">
 
             <Form.Group className="col-12">
                 <Form.Label>Группа:</Form.Label>
                 <Form.Select 
                     className={'form-control'} 
-                    onChange={e => courseByGroyp(e.target.value)} disabled={false}>
+                    onChange={e => changeGroup(e.target.value)} disabled={false}>
                         {parseGroups()}
                 </Form.Select>
             </Form.Group>
@@ -54,7 +53,7 @@ const TabsGroup = () => {
                 <Form.Control 
                     readOnly={true}
                     placeholder="Наименование Института/Факультета" 
-                    value={selectedGroup?.department_name}/>
+                    value={selectedGroup?.department_name || ''}/>
             </Form.Group>
 
             <Form.Group className="col-12">
@@ -62,7 +61,7 @@ const TabsGroup = () => {
                 <Form.Control 
                     readOnly={true}
                     placeholder="Наименование Специальности" 
-                    value={selectedGroup?.specialty_name}/>
+                    value={selectedGroup?.specialty_name || ''}/>
             </Form.Group>
 
             <Form.Group className="col-md-6">
@@ -70,7 +69,7 @@ const TabsGroup = () => {
                 <Form.Control 
                     readOnly={true}
                     placeholder="Форма обучения" 
-                    value={selectedGroup?.form_name}/>
+                    value={selectedGroup?.form_name || ''}/>
             </Form.Group>
 
             <Form.Group className="col-md-6">
@@ -78,7 +77,7 @@ const TabsGroup = () => {
                 <Form.Control
                     readOnly={true} 
                     placeholder="Форма оплаты"
-                    value={selectedGroup?.basis}/>
+                    value={selectedGroup?.basis || ''}/>
             </Form.Group>
 
             <Form.Group className="col-md-6">
@@ -86,7 +85,7 @@ const TabsGroup = () => {
                 <Form.Control 
                     readOnly={true}
                     placeholder="Зачетная книга" 
-                    value={selectedGroup?.record_book}/>
+                    value={selectedGroup?.record_book || ''}/>
             </Form.Group>
 
             <Form.Group className="col-md-6">
@@ -94,7 +93,7 @@ const TabsGroup = () => {
                 <Form.Control 
                     readOnly={true}
                     placeholder="Образовательный уровень" 
-                    value={selectedGroup?.level_name}/>
+                    value={selectedGroup?.level_name || ''}/>
             </Form.Group>
 
             <Form.Group className="col-md-6">
@@ -102,7 +101,7 @@ const TabsGroup = () => {
                 <Form.Control 
                     readOnly={true}
                     placeholder="Год поступления" 
-                    value={selectedGroup?.group_date_start}/>
+                    value={selectedGroup?.group_date_start || ''}/>
             </Form.Group>
 
             <Form.Group className="col-md-6">
@@ -110,7 +109,7 @@ const TabsGroup = () => {
                 <Form.Control 
                     readOnly={true}
                     placeholder="Год окончания" 
-                    value={selectedGroup?.group_date_end}/>
+                    value={selectedGroup?.group_date_end || ''}/>
             </Form.Group>
 
             <hr />

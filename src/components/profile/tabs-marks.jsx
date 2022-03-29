@@ -22,10 +22,14 @@ const TabsMarks = () => {
     const formControls = useSelector(state => state.forms.formControlSemester);
     const marks = useSelector(state => state.marks.marksByStudent);
     const [selectedCourse, setSelectedCourse] = useState('');
+    const [selectedSemester, setSelectedSemester] = useState('');
+    const [selectedGroup, setSelectedGroup] = useState('');
 
     useEffect(() => {
-        if (group.length > 0)
+        if (group.length > 0) {
             dispatch(fetchPlanIdByGroup(group[0].id_specialty, group[0].group_date_start));
+            setSelectedGroup(group[0].id);
+        }
     }, [group]); // view change group
 
     useEffect(() => {
@@ -42,28 +46,36 @@ const TabsMarks = () => {
 
     useEffect(() => {
         if (semesters.length > 0) {
-            let selectedSemester = semesters[0].name;
-            selectedSemester = selectedSemester.split(' ')[1];
-            dispatch(fetchFormControlSemester(plans.id, selectedSemester, courses[0].idCoursePlan));       
+            let sem = semesters[0].name;
+            sem = sem.split(' ')[1];
+            dispatch(fetchFormControlSemester(plans.id, sem, courses[0].idCoursePlan));   
+            setSelectedSemester(sem); 
         }
     }, [semesters]);
 
-    /*useEffect(() => {
-        if (semesters.length > 0) {
-            let selectedSemester = semesters[0].name;
-            selectedSemester = selectedSemester.split(' ')[1];
+    useEffect(() => {
+        if (formControls.length > 0) {
             dispatch(fetchMarksByStudent(
-                group[0].id,
+                selectedGroup,
                 userInformation.id_student, 
                 selectedSemester,
                 formControls[0].id,
-                courses[0].idCoursePlan,
+                selectedCourse,
                 plans.id 
-            ));
+            ));   
         }
-    }, [semesters]);
-    */
+    }, [formControls]);
      
+    const parseGroups = () => {
+        const options = [];
+        for (let index = 0; index < group.length; index++)
+            options.push(
+                <option key={group[index].id} value={group[index].id}>{group[index].group_nickname}</option>
+            )
+
+        return options;
+    };
+
     const parseCourse = () => {
         const options = [];
         for (let index = 0; index < courses.length; index++) {
@@ -111,15 +123,20 @@ const TabsMarks = () => {
         return options;
     };
 
+    const courseByGroyp = (id_group) => {
+        dispatch(fetchCoursesByGroup(plans.id, id_group));
+        setSelectedGroup(group[0].id);
+    };
+
     const semestersByCourse = (idCourse) => {
         // Выдать информацию на семестры
         dispatch(fetchSemestersByCourse(idCourse));
 
         if (semesters.length > 0) {
-            let selectedSemester = semesters[0].name;
-            selectedSemester = selectedSemester.split(' ')[1];
+            let sem = semesters[0].name;
+            sem = sem.split(' ')[1];
 
-            dispatch(fetchFormControlSemester(plans.id, selectedSemester, idCourse));
+            dispatch(fetchFormControlSemester(plans.id, sem, idCourse));
         }
     };
 
@@ -129,23 +146,31 @@ const TabsMarks = () => {
     };
 
     const marksByConrol = (form) => {
-        let selectedSemester = semesters[0].name;
-            selectedSemester = selectedSemester.split(' ')[1];
+        let sem = semesters[0].name;
+        sem = sem.split(' ')[1];
         dispatch(fetchMarksByStudent(
             group[0].id,
             userInformation.id_student, 
-            selectedSemester,
+            sem,
             form,
             courses[0].idCoursePlan,
             plans.id 
         ));
     };
 
-
     return (
-        <div className="row g-3" style={{padding: '1rem'}}>
+        <div className="row g-3">
 
-            <Form.Group className="col-md-4">
+            <Form.Group className="col-md-3">
+                <Form.Label>Группа:</Form.Label>
+                <Form.Select 
+                    className={'form-control'} 
+                    onChange={e => courseByGroyp(e.target.value)} disabled={false}>
+                        {parseGroups()}
+                </Form.Select>
+            </Form.Group>
+
+            <Form.Group className="col-md-3">
                 <Form.Label>Курс:</Form.Label>
                 <Form.Select 
                     className={'form-control'} 
@@ -155,7 +180,7 @@ const TabsMarks = () => {
                 </Form.Select>
             </Form.Group>
 
-            <Form.Group className="col-md-4">
+            <Form.Group className="col-md-3">
                 <Form.Label>Семестр:</Form.Label>
                 <Form.Select 
                     className={'form-control'} 
@@ -165,7 +190,7 @@ const TabsMarks = () => {
                 </Form.Select>
             </Form.Group>
 
-            <Form.Group className="col-md-4">
+            <Form.Group className="col-md-3">
                 <Form.Label>Форма контроля:</Form.Label>
                 <Form.Select 
                     className={'form-control'} 
@@ -192,17 +217,15 @@ const TabsMarks = () => {
                      marks.map((item , i) => {
                         return [
                             <tr key={i}>
-                            <td>{item.id_mark}</td>
-                            <td>{item.form_control_name}</td>
-                            <td>{item.subject_name}</td>
-                            <td>{item.semester}</td>
-                            <td>{item.ball_100}</td>
-                            <td>{item.ball_ects}</td>
-                            <td>{item.ball_5}</td>
-
-                        </tr>
+                                <td>{item.id_mark}</td>
+                                <td>{item.form_control_name}</td>
+                                <td>{item.subject_name}</td>
+                                <td>{item.semester}</td>
+                                <td>{item.ball_100}</td>
+                                <td>{item.ball_ects}</td>
+                                <td>{item.ball_5}</td>
+                            </tr>
                         ]
-
                     })
                 }
             </tbody>

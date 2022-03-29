@@ -1,18 +1,22 @@
-import React , {useEffect} from "react";
+import React , {useEffect , useState} from "react";
 import {useDispatch ,useSelector } from "react-redux";
 import Cookies from "universal-cookie/es6";
-import {Card , Image, Row, Tabs ,Tab } from "react-bootstrap";
+import {Card , Image, Row} from "react-bootstrap";
 import { fetchStudentById } from "../../store/actions/student-actions";
+import moment from "moment";
+import Tabs from '../layouts/tabs';
 import TabsMarks from "./tabs-marks";
 import TabsGroup from "./tabs-group";
 import TabsRewardings from './tabs-rewardings';
-import moment from "moment";
+import '../../styles/tabs.scss';
+
 
 const TabsProfile = () => {
 
     const dispatch = useDispatch();
     const cookie = new Cookies();
     const student = useSelector(state => state.students.student);
+    const [tab, setTab] = useState(1);
 
     useEffect(() => {
         const userInformation = cookie.get('user');
@@ -56,21 +60,12 @@ const TabsProfile = () => {
                             <Card.Body>
                                 <Row>
                                 <Tabs
-                                    defaultActiveKey="first"
-                                    transition={false}
-                                    className="mb-3"
-                                    >
-                                    <Tab eventKey="first" title="Основная информация">
-                                        <TabsGroup />
-                                    </Tab>
-                                    <Tab eventKey="second" title="Оценки">
-                                        <TabsMarks />
-                                    </Tab>
-                                    <Tab eventKey="third" title="Достижения">
-                                        <TabsRewardings/>
-                                    </Tab>
-                                    </Tabs>
-                                    
+                                    tabsArr={['Личная информация', 'Успеваемость', 'Достижения']}
+                                    selectedTab={(tabNumber) => setTab(tabNumber)}
+                                />
+                                {tab === 1 && <TabsGroup /> }
+                                {tab === 2 &&  <TabsMarks /> }
+                                {tab === 3 &&  <TabsRewardings/> }
                                 </Row>
                             </Card.Body>
                         </Card>
