@@ -5,6 +5,7 @@ import {Card , Image, Row, Tabs ,Tab } from "react-bootstrap";
 import { fetchStudentById } from "../../store/actions/student-actions";
 import TabsMarks from "./tabs-marks";
 import TabsGroup from "./tabs-group";
+import TabsRewardings from './tabs-rewardings';
 import moment from "moment";
 
 const TabsProfile = () => {
@@ -65,8 +66,8 @@ const TabsProfile = () => {
                                     <Tab eventKey="second" title="Оценки">
                                         <TabsMarks />
                                     </Tab>
-                                    <Tab eventKey="third" title="Достижения" disabled>
-                                        <p>Достижения</p>
+                                    <Tab eventKey="third" title="Достижения">
+                                        <TabsRewardings/>
                                     </Tab>
                                     </Tabs>
                                     

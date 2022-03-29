@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import {Form} from 'react-bootstrap';
 import { useDispatch, useSelector } from "react-redux";
 import { fetchCoursesByGroup } from "../../store/actions/courses-actions";
 import { fetchSemestersByCourse } from "../../store/actions/semesters-actions";
@@ -21,7 +22,6 @@ const TabsMarks = () => {
     const formControls = useSelector(state => state.forms.formControlSemester);
     const marks = useSelector(state => state.marks.marksByStudent);
     const [selectedCourse, setSelectedCourse] = useState('');
-    const [loading, setLoading] = useState(false);
 
     useEffect(() => {
         if (group.length > 0)
@@ -44,22 +44,12 @@ const TabsMarks = () => {
         if (semesters.length > 0) {
             let selectedSemester = semesters[0].name;
             selectedSemester = selectedSemester.split(' ')[1];
-
-            dispatch(fetchFormControlSemester(plans.id, selectedSemester, courses[0].idCoursePlan));
-            dispatch(fetchMarksByStudent(
-                group[0].id,
-                userInformation.id_student, 
-                selectedSemester,
-                formControls[0].id,
-                courses[0].idCoursePlan,
-                plans.id 
-            ));
-            
+            dispatch(fetchFormControlSemester(plans.id, selectedSemester, courses[0].idCoursePlan));       
         }
     }, [semesters]);
 
-    useEffect(() => {
-        if (marks.length > 0) {
+    /*useEffect(() => {
+        if (semesters.length > 0) {
             let selectedSemester = semesters[0].name;
             selectedSemester = selectedSemester.split(' ')[1];
             dispatch(fetchMarksByStudent(
@@ -71,7 +61,8 @@ const TabsMarks = () => {
                 plans.id 
             ));
         }
-    }, [marks]);
+    }, [semesters]);
+    */
      
     const parseCourse = () => {
         const options = [];
@@ -137,28 +128,52 @@ const TabsMarks = () => {
         dispatch(fetchFormControlSemester(plans.id, semester, selectedCourse));
     };
 
+    const marksByConrol = (form) => {
+        let selectedSemester = semesters[0].name;
+            selectedSemester = selectedSemester.split(' ')[1];
+        dispatch(fetchMarksByStudent(
+            group[0].id,
+            userInformation.id_student, 
+            selectedSemester,
+            form,
+            courses[0].idCoursePlan,
+            plans.id 
+        ));
+    };
+
 
     return (
-        <div style={{padding: '1rem'}}>
+        <div className="row g-3" style={{padding: '1rem'}}>
 
-            <div className="col-sm-3 mt-2">
-                <h6 className="mb-0">Выбрать курс :</h6>
-            </div>
-            <select className={'form-control'} onChange={e => semestersByCourse(e.target.value)} disabled={false} >
-                        {parseCourse()}
-            </select>
-            <div className="col-sm-3 mt-2">
-                <h6 className="mb-0">Выбрать семестр :</h6>
-            </div>
-            <select className={'form-control' }onChange={e => controlBySemester(e.target.value)} disabled={semesters.length === 0} >
-                        {parseSemesters()}
-            </select>
-            <div className="col-sm-4 mt-2">
-                <h6 className="mb-0">Выбрать форму контроля :</h6>
-            </div>
-            <select className={'form-control mb-2'} disabled={formControls.length === 0}>
-                        {parseFormControl()}
-            </select>
+            <Form.Group className="col-md-4">
+                <Form.Label>Курс:</Form.Label>
+                <Form.Select 
+                    className={'form-control'} 
+                    onChange={e => semestersByCourse(e.target.value)} 
+                    disabled={false}>
+                    {parseCourse()}
+                </Form.Select>
+            </Form.Group>
+
+            <Form.Group className="col-md-4">
+                <Form.Label>Семестр:</Form.Label>
+                <Form.Select 
+                    className={'form-control'} 
+                    onChange={e => controlBySemester(e.target.value)} 
+                    disabled={semesters.length === 0} >
+                    {parseSemesters()}
+                </Form.Select>
+            </Form.Group>
+
+            <Form.Group className="col-md-4">
+                <Form.Label>Форма контроля:</Form.Label>
+                <Form.Select 
+                    className={'form-control'} 
+                    onChange={e => marksByConrol(e.target.value)} 
+                    disabled={formControls.length === 0} >
+                    {parseFormControl()}
+                </Form.Select>
+            </Form.Group>
 
             <Table responsive striped bordered hover >
             <thead>
