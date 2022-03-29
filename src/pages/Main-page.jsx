@@ -8,7 +8,7 @@ import "../styles/main-page.scss";
 const MainPage = () => {
         return (
             <MainLayout>
-              <Container className="mt-2">
+              <Container className="py-5">
                 <Card>
                   <Card.Body>
                   <div className="page-header">
