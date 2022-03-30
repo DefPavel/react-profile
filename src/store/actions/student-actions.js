@@ -8,6 +8,12 @@ export const fetchStudentById = (id_student) => {
         await axios.get(`/api/portfolio/student/${id_student}`)
         .then(resp => {
             dispatch(getStudentByIdAction(resp.data))
-        })
-    }
+        });
+    };
+};
+
+export const fetchUploadFile = (formData) => {
+    return async () => {
+        await axios.put(`/api/portfolio/student/files`, formData);
+    };
 };

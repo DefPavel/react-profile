@@ -88,9 +88,9 @@ const LoginForm = () => {
                 <div className="pt-1 mb-4">
                     <Button 
                         //disabled={loading}
-                        style={{width : '120px'}}
+                        style={{width : '110px'}}
                         type="sumbit" 
-                        variant="btn btn-dark btn-lg btn-block" >
+                        variant="btn btn-dark btn-block" >
                         <IoLockOpen size={20}/>
                         {loading && (
                             <span className="spinner-border spinner-border-sm"></span>
