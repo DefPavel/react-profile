@@ -15,8 +15,10 @@ const TabsProfile = () => {
 
     const dispatch = useDispatch();
     const cookie = new Cookies();
+    const group = useSelector(state => state.groups.groups); 
     const student = useSelector(state => state.students.student);
     const [tab, setTab] = useState(1);
+    const [selectedGroup, setGroup] = useState({});
 
     useEffect(() => {
         const userInformation = cookie.get('user');
@@ -51,6 +53,19 @@ const TabsProfile = () => {
                                     <p className="text-secondary mb-1">
                                         Город: {student?.place_of_birth}
                                     </p>
+                                    <span className="text-secondary mb-1"> 
+                                    {(() => {
+                                                switch (selectedGroup?.status) {
+                                                case "1": return <p className="text-success">Статус: Обучается</p>;
+                                                case "2": return <p className="text-warning">Статус: Выпущен</p>;
+                                                case "3": return <p className="text-danger">Статус: Отчислен</p>;
+                                                case "4": return <p className="text-danger">Статус: Академ отпуск</p>;
+                                                default: return <p>Нет информации</p>;
+                                                }
+                                            }
+                                    )()}
+                                    </span>
+
                                 </div>
                             </Card.Body>
                         </Card>          
@@ -60,10 +75,13 @@ const TabsProfile = () => {
                             <Card.Body>
                                 <Row>
                                 <Tabs
-                                    tabsArr={['Личная информация', 'Успеваемость', 'Достижения']}
+                                    tabsArr={['Основное', 'Успеваемость', 'Достижения']}
                                     selectedTab={(tabNumber) => setTab(tabNumber)}
                                 />
-                                {tab === 1 && <TabsGroup /> }
+                                {tab === 1 && <TabsGroup callbackGroup={(g) => {
+                                    setGroup(g);
+                                    console.log(selectedGroup);
+                                }}/> }
                                 {tab === 2 &&  <TabsMarks /> }
                                 {tab === 3 &&  <TabsRewardings/> }
                                 </Row>

@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { fetchAllGroupsByStudent } from "../../store/actions/group-actions";
 import Cookies from "universal-cookie/es6";
 
-const TabsGroup = () => {
+const TabsGroup = ({callbackGroup}) => {
     
     const dispatch = useDispatch();
     const cookie = new Cookies();
@@ -15,15 +15,19 @@ const TabsGroup = () => {
     const [selectedGroup, setselectedGroup] = useState('');
 
     useEffect(() => {
-        if(userInformation) {
-            console.log(group[0]);
+        if(userInformation ) {
             dispatch(fetchAllGroupsByStudent(userInformation.id_student));
-            setselectedGroup(group[0]);
         }
     }, []); // on load page
 
+    useEffect(() => {
+        if (group.length > 0) setselectedGroup(group[0]);
+    }, [group])
+
+
     const changeGroup = (id_group) => {
         setselectedGroup(group[id_group]);
+        callbackGroup(group[id_group]);
     };
 
     const parseGroups = () => {
@@ -111,19 +115,6 @@ const TabsGroup = () => {
                     placeholder="Год окончания" 
                     value={selectedGroup?.group_date_end || ''}/>
             </Form.Group>
-
-            <hr />
-            <div className="col-sm-3">
-                <h6 className="mb-0">Статус студента :</h6>
-            </div>
-            <div className="col-sm-8 text-secondary">
-                {
-                    (selectedGroup?.status === '1')
-                        ? <p className="text-success">Обучается</p>
-                        : <p className="text-danger">Выпущен</p>
-                }
-            </div>
-           
         </div>
     )  
 }
