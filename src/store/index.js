@@ -9,6 +9,7 @@ import {coursesReducer} from "./reducers/courses-reducer";
 import {semestersReducer} from "./reducers/semesters-reducer";
 import {formControlReducer} from "./reducers/form-reducer";
 import {marksReducer} from "./reducers/marks-reducer";
+import {documentsReducer} from "./reducers/documents-reducer";
 
 const rootReducer = combineReducers({
 	users: usersReducer,
@@ -19,8 +20,8 @@ const rootReducer = combineReducers({
 	semesters: semestersReducer,
 	forms: formControlReducer,
 	marks: marksReducer,
+	documents: documentsReducer,
 
-	
 });
 
 export const store = createStore(rootReducer, composeWithDevTools(applyMiddleware(thunk)));

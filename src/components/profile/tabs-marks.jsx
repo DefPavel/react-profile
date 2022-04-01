@@ -200,7 +200,7 @@ const TabsMarks = () => {
                 </Form.Select>
             </Form.Group>
 
-            <Table responsive striped bordered hover >
+            <Table responsive striped bordered >
             <thead>
                 <tr>
                 <th>#</th>
