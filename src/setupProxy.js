@@ -4,14 +4,14 @@ module.exports = function(app) {
   app.use(
     '/api',
     createProxyMiddleware({
-      target: 'http://localhost:8080',
+      target: process.env.REACT_APP_SERVER,
       changeOrigin: true,
     })
   );
   app.use(
     '/server-storage',
     createProxyMiddleware({
-      target: 'http://localhost:8080',
+      target: process.env.REACT_APP_SERVER,
       changeOrigin: true,
       pathRewrite: {'^/server-storage': ''},
     })

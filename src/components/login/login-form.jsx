@@ -29,7 +29,7 @@ const LoginForm = () => {
         if(iv.length > 32) {
             iv = iv.slice(0,32);
         }
-        const AesKey = CryptoJS.enc.Utf8.parse('8UHjPgXZzXDgkhqV2QCnooyJyxUzfJrO');
+        const AesKey = CryptoJS.enc.Utf8.parse(process.env.REACT_APP_AES_KEY);
         const byteIv = CryptoJS.enc.Hex.parse(iv);
         //Crypto
         const encryptedStringHex = CryptoJS.AES.encrypt(password, AesKey, {
