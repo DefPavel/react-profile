@@ -1,6 +1,5 @@
 import React , { useState } from "react";
 import { Form , Button  } from "react-bootstrap";
-import {IoLockOpen} from "react-icons/io5";
 
 import {signIn as signInAction} from "../../store/actions/users-actions";
 import { rand } from "random-bytes-js";
@@ -91,7 +90,6 @@ const LoginForm = () => {
                         style={{width : '110px'}}
                         type="sumbit" 
                         variant="btn btn-dark btn-block" >
-                        <IoLockOpen size={20}/>
                         {loading && (
                             <span className="spinner-border spinner-border-sm"></span>
                         )}
