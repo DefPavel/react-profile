@@ -7,6 +7,7 @@ import {fetchAllDocuments} from "../../store/actions/documents-actions";
 import Cookies from "universal-cookie/es6";
 import {Form , Button, Table ,Accordion} from 'react-bootstrap';
 import { FileDropper } from "file-dropper";
+import {IoImageSharp} from "react-icons/io5";
 
 const TabsRewardings = () => {
 
@@ -18,6 +19,7 @@ const TabsRewardings = () => {
     const documents = useSelector(state => state.documents.documents);
     const totalPage = useSelector(state => state.documents.documents.pagination?.lastPage);
     const [photo, setPhoto] = useState('');
+    
 
     useEffect(() => {
         if(userInformation) {
@@ -101,6 +103,7 @@ const TabsRewardings = () => {
                 <Form.Group className="mb-3">
                     <Form.Label htmlFor="inputData">Введитие наименование документа</Form.Label>
                     <Form.Control
+                        required
                         value={nameCertificate}
                         onChange={(e) => setNameCertificate(e.target.value)}
                         placeholder="Диплом победителя конкурса «Русский Медвежонок-2007»"
@@ -120,6 +123,9 @@ const TabsRewardings = () => {
                     acceptFiles={'image/jpeg'} 
                     callbackFile={(f) => setPhoto(f)} 
                     blockClasses={['width-file']}
+                    validateSuccessIconComponent={<IoImageSharp size={24} style={{color: 'green'}} />}
+                    validateWrongIconComponent={<IoImageSharp size={24} style={{color: 'red'}} /> }
+                    fileIconComponent={<IoImageSharp size={24} /> }
                 />
                 <div className="d-flex justify-content-center mt-3">
                     <Button 
