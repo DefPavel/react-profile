@@ -9,6 +9,7 @@
     "clsx": "^1.1.1",
     "crypto-js": "^4.1.1",
     "dotenv": "^16.0.0",
+    "file-dropper": "^1.1.0",
     "http-proxy-middleware": "^2.0.4",
     "moment": "^2.29.1",
     "node-sass": "^7.0.1",
