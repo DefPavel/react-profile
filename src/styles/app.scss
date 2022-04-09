@@ -1,6 +1,11 @@
-@import "tabs.scss";
-@import "fonts.scss";
-@import "buttons.scss";
+@import "modules/variables";
+@import "modules/tabs";
+@import "modules/fonts";
+@import "modules/buttons";
+@import "modules/login-page";
+@import "modules/main-page";
+@import "modules/profile-page";
+
 
 $colorBacground : #efefef;
 

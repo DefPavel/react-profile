@@ -8,7 +8,6 @@ import TabsLayout from '../layouts/TabsLayout';
 import TabMarks from "./TabMarks";
 import TabGroup from "./TabGroup";
 import TabsRewardings from './TabRewardings';
-import '../../styles/tabs.scss';
 
 const TabProfile = () => {
 
@@ -25,7 +24,7 @@ const TabProfile = () => {
     }, []);
     
     const getStatus = () => {
-        if(selectedGroup) {
+        if(selectedGroup)
             switch (selectedGroup?.status) {
                 case "1": return <p className="text-success">Статус: Обучается</p>;
                 case "2": return <p className="text-warning">Статус: Выпущен</p>;
@@ -33,7 +32,6 @@ const TabProfile = () => {
                 case "4": return <p className="text-danger">Статус: Академ отпуск</p>;
                 default: return <p>Нет информации</p>;
             }
-        };
     };
     
     const path = `/server-storage/${student?.photo_path}`;

@@ -2,7 +2,6 @@ import React from "react";
 import { Container } from "react-bootstrap";
 import TabProfile from "../components/profile/TabProfile";
 import BaseLayout from "../components/layouts/BaseLayout";
-import "../styles/profile-page.scss";
 
 const Profile = () => {
 

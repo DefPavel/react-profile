@@ -2,7 +2,6 @@ import React from "react";
 import { Container , Row, Col, Card } from "react-bootstrap";
 import BaseLayout from "../components/layouts/BaseLayout";
 import LoginForm from "../components/login/LoginForm";
-import "../styles/login-page.scss";
 
 const Login = () => {
     return (

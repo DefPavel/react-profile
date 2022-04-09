@@ -9,7 +9,7 @@ import Login from "./pages/Login";
 import Profile from "./pages/Profile";
 import {store} from "./store";
 import 'bootstrap/dist/css/bootstrap.min.css';
-import "./styles/style.scss";
+import "./styles/app.scss";
 
 
 const cookies = new Cookies();
