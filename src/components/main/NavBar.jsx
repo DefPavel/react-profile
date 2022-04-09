@@ -29,25 +29,22 @@ const NavBar = () => {
             </Nav>
         );
         const LoginMenu = (
-            <Nav>
-                <Nav.Link href="/login">
-                    {IconLogin}
-                </Nav.Link>
-            </Nav>
+            <Nav.Link href="/login">
+                {IconLogin}
+            </Nav.Link>
         );
 
         return authToken ? ExitMenu : LoginMenu;
     }
 
     return(
-        <Navbar collapseOnSelect expand="lg" bg="light" variant="light">
-            <Container fluid="lg">
+        <Navbar collapseOnSelect expand="lg">
+            <Container fluid="lg" >
                 <Navbar.Brand href="/"> ЭИОС «ЛГПУ» </Navbar.Brand>
-                <Navbar.Toggle aria-controls="responsive-navbar-nav" />
-                <Navbar.Collapse>
-                    <Nav className="me-auto">
+                <Navbar.Collapse className={'d-flex justify-content-end'}>
+                    <Nav>
                         <Nav.Link href="/profile">
-                        {IconProfile}
+                            {IconProfile}
                         </Nav.Link>
                         <NavDropdown title={IconDirectory} id="collasible-nav-dropdown">
                             <NavDropdown.Item href="#action/2.1">Факультеты</NavDropdown.Item>
@@ -65,8 +62,9 @@ const NavBar = () => {
                             <NavDropdown.Item href="#action/3.5">Дистанционное обучение</NavDropdown.Item>
                             <NavDropdown.Item href="#action/3.6">Библиотека</NavDropdown.Item>
                         </NavDropdown>
+                        {AuthDropdown(cookies)}
                     </Nav>
-                    {AuthDropdown(cookies)}
+
                 </Navbar.Collapse>
             </Container>
         </Navbar>
