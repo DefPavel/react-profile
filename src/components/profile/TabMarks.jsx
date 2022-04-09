@@ -9,7 +9,7 @@ import { fetchMarksByStudent } from "../../store/actions/marks-actions";
 import { Table } from "react-bootstrap";
 import Cookies from "universal-cookie/es6";
 
-const TabsMarks = () => {
+const TabMarks = () => {
 
     const dispatch = useDispatch();
     const cookie = new Cookies();
@@ -236,4 +236,4 @@ const TabsMarks = () => {
     )
 }
 
-export default TabsMarks;
+export default TabMarks;

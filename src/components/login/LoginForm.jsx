@@ -91,7 +91,7 @@ const LoginForm = () => {
                         type="sumbit" 
                         variant="btn btn-dark btn-block" >
                         {loading && (
-                            <span className="spinner-border spinner-border-sm"></span>
+                            <span className="spinner-border spinner-border-sm" />
                         )}
                         <span>Вход</span>
                     </Button>

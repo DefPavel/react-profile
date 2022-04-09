@@ -4,13 +4,13 @@ import Cookies from "universal-cookie/es6";
 import {Card , Image, Row} from "react-bootstrap";
 import { fetchStudentById } from "../../store/actions/student-actions";
 import moment from "moment";
-import Tabs from '../layouts/tabs';
-import TabsMarks from "./tabs-marks";
-import TabsGroup from "./tabs-group";
-import TabsRewardings from './tabs-rewardings';
+import TabsLayout from '../layouts/TabsLayout';
+import TabMarks from "./TabMarks";
+import TabGroup from "./TabGroup";
+import TabsRewardings from './TabRewardings';
 import '../../styles/tabs.scss';
 
-const TabsProfile = () => {
+const TabProfile = () => {
 
     const dispatch = useDispatch();
     const cookie = new Cookies(); 
@@ -75,12 +75,12 @@ const TabsProfile = () => {
                     <Card className="mb-3">
                         <Card.Body>
                             <Row>
-                            <Tabs
+                            <TabsLayout
                                 tabsArr={['Основное', 'Успеваемость', 'Достижения']}
                                 selectedTab={(tabNumber) => setTab(tabNumber)}
                             />
-                            {tab === 1 && <TabsGroup callbackGroup={(g) => setGroup(g) }/> }
-                            {tab === 2 &&  <TabsMarks /> }
+                            {tab === 1 && <TabGroup callbackGroup={(g) => setGroup(g) }/> }
+                            {tab === 2 &&  <TabMarks /> }
                             {tab === 3 &&  <TabsRewardings/> }
                             </Row>
                         </Card.Body>
@@ -90,4 +90,4 @@ const TabsProfile = () => {
     );
 }
 
-export default TabsProfile;
+export default TabProfile;

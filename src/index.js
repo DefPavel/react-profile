@@ -4,9 +4,9 @@ import axios from "axios";
 import {BrowserRouter, Route, Routes, Navigate} from "react-router-dom";
 import Cookies from 'universal-cookie/es6';
 import {Provider} from "react-redux";
-import MainPage from "./pages/Main-page";
-import LoginPage from "./pages/Login-page";
-import ProfilePage from "./pages/Profile-page";
+import App from "./pages/App";
+import Login from "./pages/Login";
+import Profile from "./pages/Profile";
 import {store} from "./store";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import "./styles/style.scss";
@@ -50,16 +50,16 @@ ReactDOM.render(
 <Provider store={store}>
   <BrowserRouter>
       <Routes>
-      <Route path='/' element={<MainPage/>}/>
+      <Route path='/' element={<App/>}/>
       <Route path="/login" exact element={
               <AuthenticationRoute>
-                  <LoginPage />
+                  <Login />
               </AuthenticationRoute>
           }/>
          
           <Route path='/profile' element={
               <PrivateRoute>
-                <ProfilePage/>
+                <Profile/>
               </PrivateRoute>
           } />
       </Routes>

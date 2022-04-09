@@ -1,7 +1,7 @@
 import React from "react";
-import NavBar from '../main/header';
+import NavBar from '../main/NavBar';
 
-const MainLayout =({children}) =>{
+const BaseLayout =({children}) =>{
     return(
         <>
             <NavBar/>
@@ -10,4 +10,4 @@ const MainLayout =({children}) =>{
     )
 }
 
-export default MainLayout;
+export default BaseLayout;

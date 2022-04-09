@@ -21,7 +21,7 @@ const HeaderAuth = () => {
     if(cookies.get('auth-token')) {
 
         const userInformation = cookies.get('user');
-        const iconSign = (<span> Ваш профиль: {userInformation.login}</span>)
+        const iconSign = (<span> Ваш профиль: {userInformation?.login}</span>)
 
         return (
             <Nav>

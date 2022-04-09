@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import clsx from "clsx";
 
-const Tabs = ({ tabsArr = [], selectedTab }) => {
+const TabsLayout = ({ tabsArr = [], selectedTab }) => {
     const [activeTab, setActiveTab] = useState(1);
 
     const parseTabs = () => {
@@ -37,4 +37,4 @@ const Tabs = ({ tabsArr = [], selectedTab }) => {
     );
 };
 
-export default Tabs;
+export default TabsLayout;

@@ -1,12 +1,12 @@
 import React from "react";
 import { Container , Row, Col, Card } from "react-bootstrap";
-import MainLayout from "../components/layouts/main-layout";
-import LoginForm from "../components/login/login-form";
+import BaseLayout from "../components/layouts/BaseLayout";
+import LoginForm from "../components/login/LoginForm";
 import "../styles/login-page.scss";
 
-const LoginPage = () => {
+const Login = () => {
     return (
-        <MainLayout>
+        <BaseLayout>
             <Container className="py-5 h-100">
                 <Row className='d-flex justify-content-center align-items-center h-100"'>
                     <Col className='col-xl-10'>
@@ -24,8 +24,8 @@ const LoginPage = () => {
                     </Col>
                 </Row>
             </Container>
-        </MainLayout>
+        </BaseLayout>
     )
 }
 
-export default LoginPage;
+export default Login;

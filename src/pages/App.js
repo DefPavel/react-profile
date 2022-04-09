@@ -1,13 +1,13 @@
 import React from "react";
 import {Card, Container, Row } from "react-bootstrap";
 
-import MainLayout from "../components/layouts/main-layout";
-import LinkButtons from "../components/main/link-buttons";
+import BaseLayout from "../components/layouts/BaseLayout";
+import LinkButtons from "../components/main/LinkButtons";
 import "../styles/main-page.scss";
 
-const MainPage = () => {
+const App = () => {
         return (
-            <MainLayout>
+            <BaseLayout>
               <Container className="py-5">
                 <Card>
                   <Card.Body>
@@ -35,8 +35,8 @@ const MainPage = () => {
                   </Card.Body>
                 </Card>
               </Container>
-            </MainLayout>
+            </BaseLayout>
     )
 }
 
-export default MainPage;
+export default App;
