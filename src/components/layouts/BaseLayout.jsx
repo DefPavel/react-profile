@@ -1,10 +1,10 @@
 import React from "react";
-import NavBar from '../main/NavBar';
+import Header from "../main/Header";
 
 const BaseLayout =({children}) =>{
     return(
         <>
-            <NavBar/>
+            <Header/>
             <main>{children}</main>
         </>
     )
