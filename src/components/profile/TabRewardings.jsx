@@ -9,7 +9,7 @@ import {Form , Button, Table ,Accordion} from 'react-bootstrap';
 import { FileDropper } from "file-dropper";
 import {IoImageSharp} from "react-icons/io5";
 
-const TabsRewardings = () => {
+const TabRewardings = () => {
 
     const [nameCertificate , setNameCertificate] = useState('');
     const [dateCertificate , setDateCertificate] = useState('');
@@ -143,4 +143,4 @@ const TabsRewardings = () => {
     )
 }
 
-export default TabsRewardings;
+export default TabRewardings;

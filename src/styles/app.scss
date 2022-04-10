@@ -1,0 +1,27 @@
+@import "modules/variables";
+@import "modules/tabs";
+@import "modules/fonts";
+@import "modules/buttons";
+@import "modules/login-page";
+@import "modules/main-page";
+@import "modules/profile-page";
+@import "modules/header";
+
+$colorBacground : #efefef;
+
+* {
+    padding: 0;
+    margin: 0;
+}
+body {
+    background-color: $colorBacground;
+}
+#root {
+    width: 100vw;
+    height: 100vh;
+}
+
+.width-file {
+    max-width: 400px;
+    width: auto;
+}

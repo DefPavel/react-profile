@@ -1,0 +1,16 @@
+@import "variables";
+
+header {
+  background-color: #1A3059;
+  font-family: $mainFont;
+
+  nav > .container-lg > a,
+  .navbar-nav > a,
+  .nav-item.dropdown > a{
+    color: #ffffff !important;
+  }
+
+  .navbar-brand {
+    font-weight: 600;
+  }
+}

@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { fetchAllGroupsByStudent } from "../../store/actions/group-actions";
 import Cookies from "universal-cookie/es6";
 
-const TabsGroup = ({callbackGroup}) => {
+const TabGroup = ({callbackGroup}) => {
     
     const dispatch = useDispatch();
     const cookie = new Cookies();
@@ -119,4 +119,4 @@ const TabsGroup = ({callbackGroup}) => {
     )  
 }
 
-export default TabsGroup;
+export default TabGroup;
